@@ -69,3 +69,5 @@ The software uses the Jakarta Regexp package
 Jakarta Commons project (http://jakarta.apache.org/commons).
 The license terms of these packages are in the file named
 "LICENSE.apache" in this directory.
+
+PMD license can be found [here](https://github.com/pmd/pmd/blob/master/LICENSE).
