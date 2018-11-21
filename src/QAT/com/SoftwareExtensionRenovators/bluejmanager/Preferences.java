@@ -38,19 +38,13 @@ import java.io.File;
  */
 public class Preferences implements PreferenceGenerator
 {
-    //private com.SoftwareExtensionRenovators.toolbox.checkstyle.Preferences mCheckstylePref;
+    private com.SoftwareExtensionRenovators.toolbox.checkstyle.Preferences mCheckstylePref;
     private com.SoftwareExtensionRenovators.toolbox.pmd.Preferences mPMDPref;
 
 
-    /**
-     * Creates a <code>Preferences</code> object that manages
-     * the Checkstyle extension panel of the BlueJ Preferences dialog.
-     * Panel allows user to select a Checkstyle configuration and
-     * properties files.
-     */
     public Preferences()
     {
-        //mCheckstylePref = new com.SoftwareExtensionRenovators.toolbox.checkstyle.Preferences();
+        mCheckstylePref = new com.SoftwareExtensionRenovators.toolbox.checkstyle.Preferences();
         mPMDPref = new com.SoftwareExtensionRenovators.toolbox.pmd.Preferences();
 
     }
@@ -59,7 +53,7 @@ public class Preferences implements PreferenceGenerator
     public void saveValues()
     {
 
-        //mCheckstylePref.saveValues();
+        mCheckstylePref.saveValues();
         mPMDPref.saveValues();
     }
 
@@ -67,15 +61,21 @@ public class Preferences implements PreferenceGenerator
     public void loadValues()
     {
 
-        //mCheckstylePref.loadValues();
+        mCheckstylePref.loadValues();
         mPMDPref.loadValues();
     }
 
     /** @see bluej.extensions.PreferenceGenerator#getPanel() */
     public JPanel getPanel()
     {
-        return mPMDPref.getPanel();
-        //return mCheckstylePref.getPanel();
+        JPanel container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+
+        container.add(mPMDPref.getPanel());
+        container.add(mCheckstylePref.getPanel());
+
+        return container;
+
     }
 }
 
