@@ -19,9 +19,6 @@ public class PMDAction extends AbstractAction {
     private com.SoftwareExtensionRenovators.toolbox.pmd.Preferences mPMDPref = new com.SoftwareExtensionRenovators.toolbox.pmd.Preferences();;
     private com.SoftwareExtensionRenovators.toolbox.pmd.Preferences mPMDPrefOptions = new com.SoftwareExtensionRenovators.toolbox.pmd.Preferences();;
 
-    //private Preferences preferences = new Preferences();
-
-
     public PMDAction (Preferences preferences) {this.mPMDPref = preferences; }
 
     public PMDAction(String menuName,BPackage aPackage){
@@ -41,19 +38,14 @@ public class PMDAction extends AbstractAction {
     public void actionPerformed(ActionEvent anEvent){
 
         if(this.javaDir != null && !this.javaDir.trim().isEmpty()){
-            //String pmdPath = "G:/programs/bluej/lib/extensions/pmd-bin-6.9.0";
-            //String pmdPath = "Users/jackienugent/pmd-bin-6.9.0";
             String pmdPath = PMDAction.this.mPMDPref.getPMDPath();
             String pmdOptions = PMDAction.this.mPMDPrefOptions.getPMDOptions();
             if(pmdPath != null && !pmdPath.trim().isEmpty()){
                 try {
                     JOptionPane.showMessageDialog((Component) null, "Running PMD on all Classes (Click OK)");
-                    //String myCommand = pmdPath + "/bin/run.sh" + ",pmd,-format,text,-R,java-quickstart,-version,1.8,-language,java,-no-cache,-d," + this.javaDir;
                     String myCommand= pmdPath + "/bin/run.sh pmd " + pmdOptions + this.javaDir;
                     if(SystemUtils.isWindows()){
                         myCommand= pmdPath + "\\bin\\pmd.bat " + pmdOptions + this.javaDir;
-                        //myCommand = pmdPath + "\\bin\\pmd.bat" + ",-format,text,-R,java-quickstart,-version,1.8,-language,java,-no-cache,-d," + this.javaDir;
-
                     }
                     String output = this.runPMD(myCommand);
                     JOptionPane.showMessageDialog((Component) null, "Project Checked");

@@ -48,8 +48,13 @@ public class ExtensionMenu extends MenuGenerator {
         final JMenuItem pmdMenu = new JMenuItem("PMD");
         pmdMenu.addActionListener(new PMDAction("PMD",aPackage));
 
+        final JMenuItem spotBugsMunu = new JMenuItem("SpotBugs");
+        spotBugsMunu.setEnabled(false);
+
         toolsMenu.add(checkstyleMenu);
         toolsMenu.add(pmdMenu);
+        toolsMenu.add(spotBugsMunu);
+
 
         return toolsMenu;
 
