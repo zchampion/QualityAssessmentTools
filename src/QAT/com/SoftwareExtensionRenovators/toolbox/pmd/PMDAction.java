@@ -43,7 +43,7 @@ public class PMDAction extends AbstractAction {
             if(pmdPath != null && !pmdPath.trim().isEmpty()){
                 try {
                     JOptionPane.showMessageDialog((Component) null, "Running PMD on all Classes (Click OK)");
-                    String myCommand= pmdPath + "/bin/run.sh pmd " + pmdOptions + this.javaDir;
+                    String myCommand= pmdPath + "/bin/run.sh" + ",pmd" + pmdOptions + this.javaDir;
                     if(SystemUtils.isWindows()){
                         myCommand= pmdPath + "\\bin\\pmd.bat " + pmdOptions + this.javaDir;
                     }
