@@ -1,2 +1,4 @@
-com.SoftwareExtensionRenovators.tools.QualityAssessmentTools.checks
-com.SoftwareExtensionRenovators.tools.QualityAssessmentTools.plugins.bluej
+com.SoftwareExtensionRenovators.bluejmanager
+com.SoftwareExtensionRenovators.toolbox.checkstyle
+com.SoftwareExtensionRenovators.toolbox.checkstyle.checks
+com.SoftwareExtensionRenovators.toolbox.pmd

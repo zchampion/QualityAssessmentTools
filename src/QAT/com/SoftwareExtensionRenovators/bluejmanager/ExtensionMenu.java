@@ -38,7 +38,6 @@ public class ExtensionMenu extends MenuGenerator {
     /**
      * @see bluej.extensions.MenuGenerator#getToolsMenuItem(bluej.extensions.BPackage)
      */
-
     public JMenuItem getToolsMenuItem(BPackage aPackage) {
 
         final JMenu toolsMenu = new JMenu("Quality Assessment Tools");
@@ -47,7 +46,7 @@ public class ExtensionMenu extends MenuGenerator {
         checkstyleMenu.addActionListener(new MenuAction());
 
         final JMenuItem pmdMenu = new JMenuItem("PMD");
-        pmdMenu.addActionListener(new PMDAction(aPackage));
+        pmdMenu.addActionListener(new PMDAction("PMD",aPackage));
 
         toolsMenu.add(checkstyleMenu);
         toolsMenu.add(pmdMenu);

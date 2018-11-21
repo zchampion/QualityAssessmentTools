@@ -25,7 +25,7 @@ public class Preferences implements PreferenceGenerator {
     private BlueJ bluej;
     public static final String PROPERTY_PMD_PATH = "PMD.Path";
     public static final String PROPERTY_PMD_OPTIONS = "PMD.Options";
-    private static final String PMD_OPTIONS_DEFAULT = "-format text -R java-quickstart -version 1.7 -language java";
+    private static final String PMD_OPTIONS_DEFAULT = ",-f,text,-R,java-quickstart,-version,1.8,-language,java,-no-cache,-d,";
 
     public Preferences() {
 

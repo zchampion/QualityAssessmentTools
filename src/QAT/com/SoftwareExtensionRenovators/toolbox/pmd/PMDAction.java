@@ -3,6 +3,7 @@ package com.SoftwareExtensionRenovators.toolbox.pmd;
 import bluej.extensions.BPackage;
 import bluej.extensions.PackageNotFoundException;
 import bluej.extensions.ProjectNotOpenException;
+import com.SoftwareExtensionRenovators.toolbox.pmd.Preferences;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,14 +13,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class PMDAction extends AbstractAction {
-
     private static final long serialVersionUID = 832198409175L;
-
+    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private String javaDir;
+    private com.SoftwareExtensionRenovators.toolbox.pmd.Preferences mPMDPref = new com.SoftwareExtensionRenovators.toolbox.pmd.Preferences();;
+    private com.SoftwareExtensionRenovators.toolbox.pmd.Preferences mPMDPrefOptions = new com.SoftwareExtensionRenovators.toolbox.pmd.Preferences();;
 
-    private static final String LINE_SEPARATOR = System.getProperty(("line.separator"));
+    //private Preferences preferences = new Preferences();
 
-    public void determineJavaFileName(BPackage aPackage){
+
+    public PMDAction (Preferences preferences) {this.mPMDPref = preferences; }
+
+    public PMDAction(String menuName,BPackage aPackage){
+        this.determineJavaDir(aPackage);
+        this.putValue("Name", menuName);
+    }
+
+    public void determineJavaDir(BPackage aPackage){
         try{
             this.javaDir = aPackage.getDir().getPath().toString();
         }catch (ProjectNotOpenException | PackageNotFoundException e){
@@ -27,22 +37,22 @@ public class PMDAction extends AbstractAction {
         }
 
     }
-    public PMDAction(BPackage aPackage){
-        this.determineJavaFileName(aPackage);
-
-    }
 
     public void actionPerformed(ActionEvent anEvent){
 
         if(this.javaDir != null && !this.javaDir.trim().isEmpty()){
             //String pmdPath = "G:/programs/bluej/lib/extensions/pmd-bin-6.9.0";
-            String pmdPath = "Users/jackienugent/pmd-bin-6.9.0";
+            //String pmdPath = "Users/jackienugent/pmd-bin-6.9.0";
+            String pmdPath = PMDAction.this.mPMDPref.getPMDPath();
+            String pmdOptions = PMDAction.this.mPMDPrefOptions.getPMDOptions();
             if(pmdPath != null && !pmdPath.trim().isEmpty()){
                 try {
                     JOptionPane.showMessageDialog((Component) null, "Running PMD on all Classes (Click OK)");
-                    String myCommand = pmdPath + "/bin/run.sh" + ",pmd,-format,text,-R,java-quickstart,-version,1.8,-language,java,-no-cache,-d," + this.javaDir;
+                    //String myCommand = pmdPath + "/bin/run.sh" + ",pmd,-format,text,-R,java-quickstart,-version,1.8,-language,java,-no-cache,-d," + this.javaDir;
+                    String myCommand= pmdPath + "/bin/run.sh pmd " + pmdOptions + this.javaDir;
                     if(SystemUtils.isWindows()){
-                        myCommand = pmdPath + "\\bin\\pmd.bat" + ",-format,text,-R,java-quickstart,-version,1.8,-language,java,-no-cache,-d," + this.javaDir;
+                        myCommand= pmdPath + "\\bin\\pmd.bat " + pmdOptions + this.javaDir;
+                        //myCommand = pmdPath + "\\bin\\pmd.bat" + ",-format,text,-R,java-quickstart,-version,1.8,-language,java,-no-cache,-d," + this.javaDir;
 
                     }
                     String output = this.runPMD(myCommand);

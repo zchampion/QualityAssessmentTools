@@ -20,8 +20,16 @@
 
 package com.SoftwareExtensionRenovators.bluejmanager;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+
+import bluej.extensions.BlueJ;
 import bluej.extensions.PreferenceGenerator;
+import com.SoftwareExtensionRenovators.toolbox.pmd.SystemUtils;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Manages Checkstyle extension panel in BlueJ preferences.
@@ -30,7 +38,7 @@ import bluej.extensions.PreferenceGenerator;
  */
 public class Preferences implements PreferenceGenerator
 {
-    private com.SoftwareExtensionRenovators.toolbox.checkstyle.Preferences mCheckstylePref;
+    //private com.SoftwareExtensionRenovators.toolbox.checkstyle.Preferences mCheckstylePref;
     private com.SoftwareExtensionRenovators.toolbox.pmd.Preferences mPMDPref;
 
 
@@ -44,6 +52,7 @@ public class Preferences implements PreferenceGenerator
     {
         //mCheckstylePref = new com.SoftwareExtensionRenovators.toolbox.checkstyle.Preferences();
         mPMDPref = new com.SoftwareExtensionRenovators.toolbox.pmd.Preferences();
+
     }
 
     /** @see bluej.extensions.PreferenceGenerator#saveValues() */
@@ -68,5 +77,6 @@ public class Preferences implements PreferenceGenerator
         return mPMDPref.getPanel();
         //return mCheckstylePref.getPanel();
     }
-
 }
+
+
