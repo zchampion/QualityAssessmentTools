@@ -1,0 +1,177 @@
+<project name="bluejQAT" default="build.bindist" basedir=".">
+
+  <!-- set global properties for this build -->
+
+  <!-- Give user a chance to override without editing this file -->
+  <!-- (and without typing -D each time it compiles it) -->
+  <property file="QAT.buildproperties" />
+  <property file="${user.home}/QAT.buildproperties" />
+
+  <property name="bluejext.jar" value="lib/bluejext.jar" />
+  <property name="checkstyle-all.jar" value="lib/checkstyle-all.jar" />
+  <property name="PMD.jar" value="lib/pmd-core-6.9.0" />
+
+  <property name="dist.dir" value="target/dist" />
+
+  <property name="extension-version" value="0.4.1" />
+  <property name="extension" value="QualityAssessmentTools-${extension-version}" />
+
+  <property name="dist.extensions.dir" value="${dist.dir}/${extension}/lib/extensions"/>
+  <property name="dist.docs.dir" value="${dist.dir}/${extension}/docs/extensions/QAT"/>
+
+  <!-- add classes to generate Javadoc -->
+  <path id="javadoc.classpath">
+    <pathelement location="${ant.home}/lib/crimson.jar" />
+    <path refid="run.classpath" />
+  </path>
+
+  <path id="build.classpath">
+    <pathelement location="${bluejext.jar}" />
+    <pathelement location="${checkstyle-all.jar}" />
+    <pathelement location="${ant.home}/lib/ant.jar" />
+    <pathelement location="${PMD.jar}" />
+  </path>
+
+  <path id="run.classpath">
+    <pathelement location="target/QAT" />
+    <path refid="build.classpath" />
+  </path>
+
+  <target name="display.classpath" description="Displays the run classpath">
+    <property name="asd" refid="run.classpath" />
+    <echo message="Classpath is ${asd}" />
+  </target>
+
+  <!-- -->
+  <!-- Cleanup targets -->
+  <!-- -->
+  <target name="clean" description="Cleans any directories and generated files">
+    <delete dir="target" />
+  </target>
+
+  <!-- -->
+  <!-- COMPILE TARGETS -->
+  <!-- -->
+  <target name="compile.QAT"
+          description="Compiles the source code">
+    <mkdir dir="target/QAT" />
+    <javac srcdir="src/QAT"
+           destdir="target/QAT"
+           deprecation="on" debug="on"
+           classpathref="build.classpath">
+     <compilerarg value="-Xlint:unchecked"/>
+    </javac>
+  </target>
+
+  <!-- -->
+  <!-- DIST TARGETS -->
+  <!-- -->
+  <target name="build.extension" depends="compile.QAT"
+          description="Builds the extension jar file">
+    <mkdir dir="${dist.dir}" />
+    <mkdir dir="${dist.extensions.dir}" />
+    <jar jarfile="${dist.extensions.dir}/${extension}.jar"
+         manifest="config/manifest.mf"
+         update="false">
+      <fileset dir="target/QAT"/>
+      <fileset dir="docs">
+        <include name="*.xml"/>
+      </fileset>
+      <zipfileset src="${checkstyle-all.jar}">
+        <exclude name="META-INF/"/>
+      </zipfileset>
+    </jar>
+    <copy todir=".">
+      <fileset dir="${dist.extensions.dir}">
+        <include name="${extension}.jar"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="build.bindist" depends="build.extension,javadoc"
+          description="Builds the compressed distribution files">
+    <delete dir="${dist.extensions.dir}/QAT" />
+    <mkdir dir="${dist.extensions.dir}/QAT" />
+    <mkdir dir="${dist.docs.dir}" />
+
+    <!-- copy stuff without filtering -->
+    <copy todir="${dist.docs.dir}">
+      <fileset dir =".">
+      	<include name="LICENSE*"/>
+        <include name="README"/>
+        <include name="RIGHTS.antlr"/>
+        <include name="contrib/**"/>
+        <include name="**/.cvsignore"/>
+        <include name="**/CVS"/>
+      </fileset>
+      <fileset dir="./docs">
+        <include name="**"/>
+        <exclude name="*.xml"/>
+        <exclude name="*.txt"/>
+        <exclude name="java.header"/>
+      </fileset>
+    </copy>
+    <copy todir="${dist.extensions.dir}/QAT">
+      <fileset dir="./docs">
+        <include name="*.xml"/>
+        <include name="java.header"/>
+      </fileset>
+      <fileset dir="./lib">
+        <include name="QAT*.jar"/>
+      </fileset>
+    </copy>
+    <!-- create the final zip & tar/gzip files -->
+    <zip zipfile="${dist.dir}/QAT-extension-${extension-version}.zip">
+      <fileset dir="${dist.dir}/${extension}">
+        <include name="**"/>
+      </fileset>
+    </zip>
+    <tar tarfile="${dist.dir}/QAT-extension-${extension-version}.tar" longfile="gnu"
+         basedir="${dist.dir}/${extension}" includes="**" />
+    <gzip zipfile="${dist.dir}/QAT-extension-${extension-version}.tar.gz"
+          src="${dist.dir}/QAT-extension-${extension-version}.tar" />
+  </target>
+
+  <target name="build.srcdist"
+          description="Builds the compressed source files for distribution">
+    <delete dir="${dist.dir}/QAT-extension-src-${extension-version}" />
+    <mkdir dir="${dist.dir}/QAT-extension-src-${extension-version}" />
+    <copy todir="${dist.dir}/QAT-extension-src-${extension-version}">
+      <fileset dir=".">
+        <include name="LICENSE*"/>
+        <include name="README"/>
+        <include name="TODO"/>
+        <include name="build.xml"/>
+        <include name="config/**"/>
+        <include name="docs/*"/>
+        <include name="${bluejext.jar}"/>
+        <include name="${checkstyle-all.jar}"/>
+        <include name="src/**"/>
+      </fileset>
+    </copy>
+    <!-- Produce the final distributions -->
+    <zip zipfile="${dist.dir}/QAT-extension-src-${extension-version}.zip">
+      <fileset dir="${dist.dir}">
+        <include name="QAT-extension-src-${extension-version}/**"/>
+      </fileset>
+    </zip>
+    <tar tarfile="${dist.dir}/QAT-extension-src-${extension-version}.tar" longfile="gnu"
+         basedir="${dist.dir}" includes="QAT-extension-src-${extension-version}/**" />
+    <gzip zipfile="${dist.dir}/QAT-extension-src-${extension-version}.tar.gz"
+          src="${dist.dir}/QAT-extQAT-extension-src-${extension-version}.tar" />
+  </target>
+
+  <target name="javadoc" depends="compile.QAT"
+          description="Creates the javadoc html files">
+    <mkdir dir="docs/api" />
+    <javadoc sourcepath="src/QAT" destdir="docs/api"
+             packagenames="com.SoftwareExtensionRenovators.tools.QualityAssessmentTools.*"
+             Windowtitle="QualityAssessmentTools Extension API"
+             classpathref="javadoc.classpath"
+             Use="true"
+             Footer="&lt;a target=&quot;_top&quot; href=&quot;./{@docRoot}/../index.html&quot;&gt;Back to the QualityAssessmentTools Extension Home Page&lt;/a&gt;">
+      <link href="https://docs.oracle.com/javase/8/docs/api/"/>
+    </javadoc>
+  </target>
+
+</project>
