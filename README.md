@@ -47,6 +47,9 @@ under QualityAssessmentTools-0.4.2.jar.
 
   Please see the PMD documentation for the rulesets available.
 
+#### Contributing Instructions
+
+[placeholder] 
 
 #### Documents
 * [Product backlog](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/Backlog.md)
