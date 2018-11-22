@@ -46,27 +46,9 @@ under QualityAssessmentTools-0.5.1.jar.
   * After installing the Quality Assessment Extension in BlueJ, go to "Tools / Preferences / Extensions". Select or enter the    "Path to PMD installation" that you have remembered from step one above. You can also fine-tune the "PMD Options"; by default, the rulesets "java-quickstart" are executed.
   * Please see the PMD documentation for the rulesets available.
 
-#### Contributing Instructions
-
-[placeholder] 
 
 #### Documents
 * [Product backlog](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/Backlog.md)
 * Product's [sprint](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/CurrentSprint.md) for the current delivery
 * [Life Cycle Process](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/LifeCycleProcess.md) that our team is using to develop the product
 
-#### Licensing
-
-This software is licensed under the terms in the file named "LICENSE" in this
-directory.
-
-The software uses the ANTLR package (http://www.antlr.org). Its license terms
-are in the file named "RIGHTS.antlr" in this directory.
-
-The software uses the Jakarta Regexp package
-(http://jakarta.apache.org/regexp) and several packages from the
-Jakarta Commons project (http://jakarta.apache.org/commons).
-The license terms of these packages are in the file named
-"LICENSE.apache" in this directory.
-
-PMD license can be found [here](https://github.com/pmd/pmd/blob/master/LICENSE).
