@@ -52,3 +52,6 @@ under QualityAssessmentTools-0.5.1.jar.
 * Product's [sprint](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/CurrentSprint.md) for the current delivery
 * [Life Cycle Process](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/LifeCycleProcess.md) that our team is using to develop the product
 
+#### Licenses
+
+This extension utilizes several tools that come with their own licenses.  Licenses for specific tools can be found in their individual directories under [src](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/tree/master/src/QAT/com/SoftwareExtensionRenovators/toolbox).
