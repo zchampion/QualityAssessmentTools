@@ -48,9 +48,9 @@ under QualityAssessmentTools-0.5.1.jar.
 
 
 #### Documents
-* [Product backlog](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/FifthDelivery/documents/Backlog.md)
-* Product's [sprint](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/FifthDelivery/documents/CurrentSprint.md) for the current delivery
-* [Life Cycle Process](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/FifthDelivery/documents/LifeCycleProcess.md) that our team is using to develop the product
+* [Product backlog](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/Backlog.md)
+* Product's [sprint](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/CurrentSprint.md) for the current delivery
+* [Life Cycle Process](https://github.com/SoftwareExtensionRenovators/QualityAssessmentTools/blob/master/documents/LifeCycleProcess.md) that our team is using to develop the product
 
 #### Licenses
 
