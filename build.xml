@@ -14,7 +14,7 @@
 
   <property name="dist.dir" value="target/dist" />
 
-  <property name="extension-version" value="0.4.2" />
+  <property name="extension-version" value="0.5.1" />
   <property name="extension" value="QualityAssessmentTools-${extension-version}" />
 
   <property name="dist.extensions.dir" value="${dist.dir}/${extension}/lib/extensions"/>
