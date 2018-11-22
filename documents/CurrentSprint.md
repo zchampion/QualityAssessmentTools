@@ -12,6 +12,6 @@
 * As a developer, I want QualityAssessmentTools extension to produce "under development" window for the tools that are not implemented yet in the cascading menu. (Our team decided to implement grayed out menu instead, Complete)
 
 ## TODO
-* Add future tool contibution instructions
+* Add future tool contribution instructions
 * Update JavaDocs
 * Clean code
