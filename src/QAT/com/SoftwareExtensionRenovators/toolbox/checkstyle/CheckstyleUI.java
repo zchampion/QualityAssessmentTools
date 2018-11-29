@@ -44,7 +44,12 @@ import bluej.extensions.event.PackageListener;
 import com.SoftwareExtensionRenovators.bluejmanager.BlueJManager;
 import com.SoftwareExtensionRenovators.bluejmanager.QualityToolExtension;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
-
+/**
+ * Manages UI elements of checkstyle extension. Refactored code.
+ * @author Rick Giles
+ * @author Egor Muscat, Jackie Nugent, Mark Huntington, Zac Champion
+ * @version $Id: Preferences.java,v 1.5 2007/08/19 03:13:52 stedwar2 Exp $
+ */
 public class CheckstyleUI
 {
     /** Singleton instance. */
@@ -78,7 +83,11 @@ public class CheckstyleUI
         mTimer.start();
     }
 
-    /** Public method to access singleton */
+
+    /**
+     * Public method to access singleton
+     * @return mInstance instance of CheckstyleUI class
+     */
     public static CheckstyleUI getCheckstyleUI(){
         if (mInstance == null){
             mInstance = new CheckstyleUI();
@@ -89,6 +98,11 @@ public class CheckstyleUI
         }
     }
 
+    /**
+     *
+     * Registers a listener for application events, package events, and compile events.
+     * @param aBlueJ A proxy object which provides services to BlueJ extensions.
+     */
     public void addListeners(BlueJ aBlueJ){
         // register listeners
         aBlueJ.addApplicationListener(new CheckstyleApplicationListener());

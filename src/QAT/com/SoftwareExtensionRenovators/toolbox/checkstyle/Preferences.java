@@ -100,7 +100,6 @@ public class Preferences implements PreferenceGenerator
      */
     public Preferences() {
         mPanel = new JPanel();
-        //mPanel.setLayout(new GridLayout(ROWS, COLS));
 
         final JPanel labelPanel = new JPanel();
         labelPanel.setLayout(new GridLayout(ROWS, 1));
@@ -136,7 +135,6 @@ public class Preferences implements PreferenceGenerator
     public void saveValues()
     {
         // save the preference values in the BlueJ properties file
-        //final BlueJManager manager = BlueJManager.getInstance();
         final String afterConfigFileName = mConfigFileTextField.getText();
         com.SoftwareExtensionRenovators.toolbox.checkstyle.CheckstyleSettings.saveConfigFileName(afterConfigFileName);
         final String afterPropsFileName = mPropsFileTextField.getText();
@@ -154,7 +152,6 @@ public class Preferences implements PreferenceGenerator
     /** @see bluej.extensions.PreferenceGenerator#loadValues() */
     public void loadValues()
     {
-        //final BlueJManager manager = BlueJManager.getInstance();
 
         mBeforeConfigFileName = com.SoftwareExtensionRenovators.toolbox.checkstyle.CheckstyleSettings.getConfigFileName();
         mBeforePropsFileName = CheckstyleSettings.getPropsFileName();
@@ -162,7 +159,7 @@ public class Preferences implements PreferenceGenerator
         mPropsFileTextField.setText(mBeforePropsFileName);
 
     }
-
+    /** @see bluej.extensions.PreferenceGenerator#getPanel() */
     public JPanel getPanel()
     {
         return mPanel;

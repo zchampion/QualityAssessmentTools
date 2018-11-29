@@ -3,7 +3,12 @@ package com.SoftwareExtensionRenovators.toolbox.checkstyle;
 import com.SoftwareExtensionRenovators.bluejmanager.BlueJManager;
 
 import java.io.InputStream;
-
+/**
+ * Manages settings of checkstyle extension.  Refactored code.
+ * @author Rick Giles
+ * @author Egor Muscat, Jackie Nugent, Mark Huntington, Zac Champion
+ * @version $Id: Preferences.java,v 1.5 2007/08/19 03:13:52 stedwar2 Exp $
+ */
 public class CheckstyleSettings {
     /** configuration file name key */
     private static final String CONFIG_FILE_NAME_KEY = "configfile";

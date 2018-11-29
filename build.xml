@@ -59,6 +59,7 @@
     <mkdir dir="target/QAT" />
     <javac srcdir="src/QAT"
            destdir="target/QAT"
+           includeantruntime="false"
            deprecation="on" debug="on"
            classpathref="build.classpath">
      <compilerarg value="-Xlint:unchecked"/>

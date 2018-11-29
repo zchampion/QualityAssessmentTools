@@ -11,21 +11,41 @@ import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+/**
+ * Manages the PMD extension action.
+ * @author Ted Mittelstaedt, from an original by Tom Copeland
+ * @author Egor Muscat, Jackie Nugent, Mark Huntington, Zac Champion
+ * @version 0.6.1
+ */
 public class PMDAction extends AbstractAction {
+
     private static final long serialVersionUID = 832198409175L;
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private String javaDir;
     private com.SoftwareExtensionRenovators.toolbox.pmd.Preferences mPMDPref = new com.SoftwareExtensionRenovators.toolbox.pmd.Preferences();;
     private com.SoftwareExtensionRenovators.toolbox.pmd.Preferences mPMDPrefOptions = new com.SoftwareExtensionRenovators.toolbox.pmd.Preferences();;
 
-    public PMDAction (Preferences preferences) {this.mPMDPref = preferences; }
+    /**
+     * Original PMD extension call of PMDAction
+     * when it was its own standalone extension
+     * @param preferences instance of Preference
+     */
+    public PMDAction(Preferences preferences) {this.mPMDPref = preferences; }
 
+    /**
+     * Starts PMD action when selected from Tools menu
+     * @param menuName "PMD"
+     * @param aPackage A wrapper for a single package of a BlueJ project
+     */
     public PMDAction(String menuName,BPackage aPackage){
         this.determineJavaDir(aPackage);
         this.putValue("Name", menuName);
     }
 
+    /**
+     * Determines the java files included in the current BlueJ package
+     * @param aPackage A wrapper for a single package of a BlueJ project
+     */
     public void determineJavaDir(BPackage aPackage){
         try{
             this.javaDir = aPackage.getDir().getPath().toString();
@@ -35,6 +55,12 @@ public class PMDAction extends AbstractAction {
 
     }
 
+    /**
+     * Invoked when PMD action occurs.  Runs package java files through the command line with PMD 
+     * executables located on user computer.
+     * Command line results display in popup window. 
+     * @param anEvent PMD button is selected under Tools menu
+     */
     public void actionPerformed(ActionEvent anEvent){
 
         if(this.javaDir != null && !this.javaDir.trim().isEmpty()){
@@ -76,6 +102,15 @@ public class PMDAction extends AbstractAction {
         }
 
     }
+
+    /**
+     * Uses default string command or user preference command to run PMD through command line.
+     * @param mycommand command line string to run PMD
+     * @return String output of command line results
+     * @throws IOException Constructs an IOException with null as its error detail message.
+     * @throws InterruptedException Thrown when a thread is waiting, sleeping, or otherwise occupied, 
+     * and the thread is interrupted, either before or during the activity.
+     */
     private String runPMD(String mycommand) throws IOException, InterruptedException {
         ProcessBuilder pb = new ProcessBuilder(mycommand.split(","));
         pb.redirectErrorStream(false);
