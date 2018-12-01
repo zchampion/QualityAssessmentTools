@@ -12,7 +12,7 @@
   <property name="extension-version" value="0.6.1" />
   <property name="extension" value="QualityAssessmentTools-${extension-version}" />
 
-  <property name="dist.extensions.dir" value="${dist.dir}/${extension}/lib/extensions"/>
+  <property name="dist.extensions.dir" value="${dist.dir}/${extension}"/>
   <property name="dist.docs.dir" value="${dist.dir}/${extension}/docs/extensions/QAT"/>
 
   <!-- add classes to generate Javadoc -->
@@ -55,9 +55,9 @@
     <javac srcdir="src/QAT"
            destdir="target/QAT"
            includeantruntime="false"
-           deprecation="on" debug="on"
+
            classpathref="build.classpath">
-     <compilerarg value="-Xlint:unchecked"/>
+
     </javac>
   </target>
 
@@ -69,8 +69,7 @@
     <mkdir dir="${dist.dir}" />
     <mkdir dir="${dist.extensions.dir}" />
     <jar jarfile="${dist.extensions.dir}/${extension}.jar"
-         manifest="config/manifest.mf"
-         update="false">
+         manifest="config/manifest.mf">
       <fileset dir="target/QAT"/>
       <fileset dir="docs">
         <include name="*.xml"/>
@@ -91,54 +90,6 @@
     </copy>
   </target>
 
-  <target name="build.bindist" depends="build.extension,javadoc"
-          description="Builds the compressed distribution files">
-    <delete dir="${dist.extensions.dir}/QAT" />
-    <mkdir dir="${dist.extensions.dir}/QAT" />
-    <mkdir dir="${dist.docs.dir}" />
-
-
-    <!-- create the final zip & tar/gzip files -->
-    <zip zipfile="${dist.dir}/QAT-extension-${extension-version}.zip">
-      <fileset dir="${dist.dir}/${extension}">
-        <include name="**"/>
-      </fileset>
-    </zip>
-    <tar tarfile="${dist.dir}/QAT-extension-${extension-version}.tar" longfile="gnu"
-         basedir="${dist.dir}/${extension}" includes="**" />
-    <gzip zipfile="${dist.dir}/QAT-extension-${extension-version}.tar.gz"
-          src="${dist.dir}/QAT-extension-${extension-version}.tar" />
-  </target>
-
-  <target name="build.srcdist"
-          description="Builds the compressed source files for distribution">
-    <delete dir="${dist.dir}/QAT-extension-src-${extension-version}" />
-    <mkdir dir="${dist.dir}/QAT-extension-src-${extension-version}" />
-    <copy todir="${dist.dir}/QAT-extension-src-${extension-version}">
-      <fileset dir=".">
-        <include name="LICENSE*"/>
-        <include name="README"/>
-        <include name="TODO"/>
-        <include name="build.xml"/>
-        <include name="config/**"/>
-        <include name="docs/*"/>
-        <include name="${bluejext.jar}"/>
-        <include name="${checkstyle-all.jar}"/>
-        <include name="src/**"/>
-      </fileset>
-    </copy>
-    <!-- Produce the final distributions -->
-    <zip zipfile="${dist.dir}/QAT-extension-src-${extension-version}.zip">
-      <fileset dir="${dist.dir}">
-        <include name="QAT-extension-src-${extension-version}/**"/>
-      </fileset>
-    </zip>
-    <tar tarfile="${dist.dir}/QAT-extension-src-${extension-version}.tar" longfile="gnu"
-         basedir="${dist.dir}" includes="QAT-extension-src-${extension-version}/**" />
-    <gzip zipfile="${dist.dir}/QAT-extension-src-${extension-version}.tar.gz"
-          src="${dist.dir}/QAT-extQAT-extension-src-${extension-version}.tar" />
-  </target>
-
   <target name="javadoc" depends="compile.QAT"
           description="Creates the javadoc html files">
     <mkdir dir="docs/api" />
@@ -150,6 +101,41 @@
              Footer="&lt;a target=&quot;_top&quot; href=&quot;./{@docRoot}/../index.html&quot;&gt;Back to the QualityAssessmentTools Extension Home Page&lt;/a&gt;">
       <link href="https://docs.oracle.com/javase/8/docs/api/"/>
     </javadoc>
+  </target>
+
+  <target name="build.srcdist"
+          description="Builds the compressed source files for distribution">
+    <delete dir="${dist.dir}/QAT-extension-${extension-version}" />
+    <mkdir dir="${dist.dir}/QAT-extension-${extension-version}" />
+    <copy todir="${dist.dir}/QAT-extension-${extension-version}">
+      <fileset dir=".">
+        <include name="LICENSE*"/>
+        <include name="README.md"/>
+        <include name="build.xml"/>
+        <include name="config/**"/>
+        <include name="docs/**"/>
+        <include name="documents/*"/>
+        <include name="${bluejext.jar}"/>
+        <include name="${checkstyle-all.jar}"/>
+        <include name="${checkstyle-extension-5.4.1.jar}"/>
+        <include name="${PMD.jar}"/>
+        <include name="src/**"/>
+      </fileset>
+    </copy>
+    <!-- Produce the final distributions -->
+    <zip zipfile="${dist.dir}/QAT-extension-${extension-version}.zip">
+      <fileset dir="${dist.dir}">
+        <include name="QAT-extension-${extension-version}/**"/>
+      </fileset>
+    </zip>
+    <tar tarfile="${dist.dir}/QAT-extension-${extension-version}.tar" longfile="gnu"
+         basedir="${dist.dir}" includes="QAT-extension-${extension-version}/**" />
+    <gzip zipfile="${dist.dir}/QAT-extension-${extension-version}.tar.gz"
+          src="${dist.dir}/QAT-extension-${extension-version}.tar" />
+  </target>
+
+  <target name="build.bindist" depends="build.srcdist,build.extension,javadoc"
+          description="Builds the compressed distribution files">
   </target>
 
 </project>
