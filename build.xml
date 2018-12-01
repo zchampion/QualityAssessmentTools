@@ -2,19 +2,14 @@
 
   <!-- set global properties for this build -->
 
-  <!-- Give user a chance to override without editing this file -->
-  <!-- (and without typing -D each time it compiles it) -->
-  <property file="QAT.buildproperties" />
-  <property file="${user.home}/QAT.buildproperties" />
-
   <property name="bluejext.jar" value="lib/bluejext.jar" />
   <property name="checkstyle-all.jar" value="lib/checkstyle-all.jar" />
-  <property name="PMD.jar" value="lib/pmd-core-6.9.0" />
+  <property name="PMD.jar" value="lib/pmd-core-6.9.0.jar" />
   <property name="checkstyle-extension-5.4.1.jar" value="lib/checkstyle-extension-5.4.1.jar" />
 
   <property name="dist.dir" value="target/dist" />
 
-  <property name="extension-version" value="0.5.1" />
+  <property name="extension-version" value="0.6.1" />
   <property name="extension" value="QualityAssessmentTools-${extension-version}" />
 
   <property name="dist.extensions.dir" value="${dist.dir}/${extension}/lib/extensions"/>
@@ -81,7 +76,12 @@
         <include name="*.xml"/>
       </fileset>
       <zipfileset src="${checkstyle-all.jar}">
-        <exclude name="META-INF/"/>
+      </zipfileset>
+      <zipfileset src="${bluejext.jar}">
+      </zipfileset>
+      <zipfileset src="${PMD.jar}">
+      </zipfileset>
+      <zipfileset src="${checkstyle-extension-5.4.1.jar}">
       </zipfileset>
     </jar>
     <copy todir=".">
@@ -97,32 +97,7 @@
     <mkdir dir="${dist.extensions.dir}/QAT" />
     <mkdir dir="${dist.docs.dir}" />
 
-    <!-- copy stuff without filtering -->
-    <copy todir="${dist.docs.dir}">
-      <fileset dir =".">
-      	<include name="LICENSE*"/>
-        <include name="README"/>
-        <include name="RIGHTS.antlr"/>
-        <include name="contrib/**"/>
-        <include name="**/.cvsignore"/>
-        <include name="**/CVS"/>
-      </fileset>
-      <fileset dir="./docs">
-        <include name="**"/>
-        <exclude name="*.xml"/>
-        <exclude name="*.txt"/>
-        <exclude name="java.header"/>
-      </fileset>
-    </copy>
-    <copy todir="${dist.extensions.dir}/QAT">
-      <fileset dir="./docs">
-        <include name="*.xml"/>
-        <include name="java.header"/>
-      </fileset>
-      <fileset dir="./lib">
-        <include name="QAT*.jar"/>
-      </fileset>
-    </copy>
+
     <!-- create the final zip & tar/gzip files -->
     <zip zipfile="${dist.dir}/QAT-extension-${extension-version}.zip">
       <fileset dir="${dist.dir}/${extension}">
