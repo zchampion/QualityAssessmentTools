@@ -62,7 +62,7 @@ public class QualityToolExtension extends Extension
             "Various tools used to analyze a user's Java source code.";
 
     /**  extension version */
-    private static final String VERSION = "0.4.1";
+    private static final String VERSION = "0.6.1";
 
     /** extension URL */
     private static final String URL =
