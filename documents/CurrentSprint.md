@@ -2,10 +2,10 @@
 
 #### Tasks:
   
-    * Update build.xml
-    * Update Javadocs
-    * Update README.md to include Ant Tasks
-    * Report Bug Issues 
-    * Try designing tests for sections of code 
+    * Update build.xml [complete]
+    * Update Javadocs [complete]
+    * Update README.md to include Ant Tasks [complete]
+    * Report Bug Issues [complete]
+    * Try designing tests for sections of code [complete]
       
 
