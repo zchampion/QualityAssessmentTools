@@ -1,4 +1,3 @@
-
 package com.SoftwareExtensionRenovators.bluejmanager;
 
 import com.SoftwareExtensionRenovators.toolbox.pmd.PMDAction;
