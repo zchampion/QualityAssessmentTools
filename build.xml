@@ -44,7 +44,7 @@
   <!-- -->
   <target name="clean" description="Cleans any directories and generated files">
     <delete dir="target" />
-    <delete failonerror="false">
+    <delete failonerror="false" verbose="true">
       <fileset dir=".">
         <include name="QualityAssessmentTools-*.*.*.jar" />
       </fileset>
@@ -141,6 +141,15 @@
 
   <target name="build.bindist" depends="build.srcdist,build.extension,javadoc"
           description="Builds the compressed distribution files">
+  </target>
+
+  <target name="run.tests" depends="compile.QAT">
+    <path>
+      <pathelement location="${ant-junit4-1.10.5.jar}" />
+      <pathelement location="${junit-4.13-beta-1.jar}" />
+    </path>
+
+    <echo message="test executed...?" />
   </target>
 
 </project>
