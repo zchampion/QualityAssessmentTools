@@ -145,11 +145,17 @@
 
   <target name="run.tests" depends="compile.QAT">
     <path>
-      <pathelement location="${ant-junit4-1.10.5.jar}" />
-      <pathelement location="${junit-4.13-beta-1.jar}" />
+      <pathelement location="lib/ant-junit4-1.10.5.jar" />
+      <pathelement location="lib/junit-4.13-beta-1.jar" />
     </path>
 
-    <echo message="test executed...?" />
+    <echo message="Executing tests..." />
+
+    <junit fork="true" dir="tests">
+      <batchtest/>
+    </junit>
+
+    <echo message="Tests executed." />
   </target>
 
 </project>
