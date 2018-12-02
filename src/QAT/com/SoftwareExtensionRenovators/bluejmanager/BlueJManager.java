@@ -1,4 +1,3 @@
-
 package com.SoftwareExtensionRenovators.bluejmanager;
 
 import java.awt.Frame;
