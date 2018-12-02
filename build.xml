@@ -44,6 +44,11 @@
   <!-- -->
   <target name="clean" description="Cleans any directories and generated files">
     <delete dir="target" />
+    <delete failonerror="false">
+      <fileset dir=".">
+        <include name="QualityAssessmentTools-*.*.*.jar" />
+      </fileset>
+    </delete>
   </target>
 
   <!-- -->
